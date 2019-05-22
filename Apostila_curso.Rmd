@@ -1,0 +1,910 @@
+---
+title: "Minicurso de introdução ao R"
+subtitle: "Semana acadêmica da economia"
+author: "Marcelo Gelati" 
+date: "12, 14 e 16 de setembro de 2016" 
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+---
+
+\newpage
+
+# Introdução ao R
+
+## Como o R funciona
+
+O R é uma linguagem de programação que funciona, basicamente, através de objetos, operadores e funções (que elas mesmo são objetos). Os *objetos* possuem um nome e podem ser dados, variáveis, funções, resultados, entre outros. Você pode realizar operações com esses objetos através de *operadores* ou de *funções*, sendo que estas necessitam de argumentos para retornar um resultado. A figura 1 resume isto:
+
+![Objetos e funções](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/funcoes_r.png)
+
+## Criando objetos
+
+Para criar um objeto, é preciso usar o operador assign `<-`. O operador também pode ser usado de maneira invertida `->`. Por exemplo, se queremos atribuir o valor **10** a um objeto **n**, devemos fazer o seguinte:
+
+```{r, collapse=TRUE, prompt=TRUE, comment = ""}
+n <- 10
+```
+
+A operação realizada acima deve ser lida da seguinte maneira: "n recebe 10". Para verificarmos o que está armazenado no objeto, basta digitar seu nome e apertar enter:
+
+```{r, collapse=TRUE, prompt=TRUE, comment=""}
+n
+```
+
+É importante ressaltar que o R é case-sensitive, isto é, sensível a maiúsculas e minúsculas. Isto significa que um objeto **N** é diferente do objeto **n** por nós criado. Veja:
+
+```{r, collapse=TRUE, prompt=TRUE, comment=""}
+N <- 20
+N
+```
+
+Todo objeto criado no R deve começar com uma letra (a-z ou A-Z). Os caracteres seguintes podem ser letras, números (0-9), underlines (_) e/ou pontos (.).
+
+Podemos atribuir operações matemáticas a um objeto:
+
+```{r, collapse=TRUE, prompt=TRUE, comment=""}
+soma <- 22 + 5
+soma
+```
+
+Mas note que podemos realizar a mesma operação sem ter que criar o objeto! Neste caso, o resultado será mostrado no console.
+
+```{r, collapse=TRUE, prompt=TRUE, comment=""}
+22 + 5
+```
+
+## Funções e operadores
+
+Como mencionado acima, as funções precisam de argumentos para que possam ser rodadas. Por exemplo, a função `is.atomic()` requer apenas um argumento: o objeto a ser testado. Caso você queira ler mais detalhes sobre alguma função, basta acessar a documentação do R. Para fazer isso, deve-se utilizar uma interrogação `?` antes da função:
+
+```{r, collapse=TRUE, prompt=TRUE, comment="", eval=FALSE}
+?is.atomic
+```
+
+A documentação de operadores (como o `+`, por exemplo) não pode ser acessada através de `?`. Neste caso, deve-se utilizar a função `help`:
+
+```{r, collapse=TRUE, prompt=TRUE, comment="", eval=FALSE}
+help("+")
+```
+
+Uma breve lista dos operadores mais básicos está no cartão de referência. Por este motivo não falaremos sobre os operadores.
+
+Quanto às funções, trabalharemos apenas com três: `rep()`, `seq()` e `sample()`.
+
+A função `rep()` serve para criar um vetor com elementos repetidos. Três de seus argumentos são:
+
+* `x`: um vetor
+
+* `times`: um inteiro **m** que fará com que o vetor seja repetido **m** vezes
+
+* `each`: um inteiro **m** que fará com que cada elemento do vetor x seja repetido **m** vezes
+
+Mostrando alguns exemplos:
+
+```{r, collapse=TRUE, prompt=TRUE, comment=""}
+rep(1:3, times = 2)
+rep(1:3, each = 2)
+rep(1:3, times = c(1, 2, 3))
+```
+
+Note que se botarmos um vetor para o argumento `times` e não um inteiro, os valores do vetor x foram repetidos tantas vezes quanto os valores do vetor de `times` dizem. Em nosso exemplo, o valor 1 foi repetido uma vez, o valor 2 foi repetido duas vezes e o valor 3 foi repetido três vezes.
+
+A função `seq()` serve para criarmos uma sequência de números. Alguns de seus argumentos são:
+
+* `from`: um inteiro **m** que denota o valor inicial
+
+* `to`: um inteiro **m** que denota o valor máximo
+
+* `by`: um inteiro **m** que dá o aumento da sequência
+
+Mais alguns exemplos:
+
+```{r, collapse=TRUE, prompt=TRUE, comment=""}
+seq(from = 2, to = 3, by = 0.1)
+seq(from = 4, to = 2, by = -1)
+seq(from = 1, to = 2, by = 0.3)
+```
+
+A função `sample()` serve para gerarmos amostras aleatórias. Seus argumentos são:
+
+* `x`: um vetor 
+
+* `size`: tamanho da amostra
+
+* `replace`: um valor lógico que indica se a amostra deve ter reposição
+
+* `prob`: um vetor que contém a probabilidade de cada cair cada valor incluso no vetor x
+
+Exemplos:
+
+```{r, collapse=TRUE, prompt=TRUE, comment=""}
+sample(c("mexerica", "amora", "cereja"), size = 10, replace = TRUE)
+sample(1:6, size = 6, replace = FALSE)
+sample(0:1, size = 15, replace = TRUE, prob = c(0.3, 0.7))
+```
+
+## Scripts
+
+Um script é basicamente um arquivo de texto que contém praticamente os mesmos comandos que você usaria no console do R. Se você estiver usando o RStudio, é possível criar um novo script utilizando o atalho *Ctrl + Shift + N* ou clicando embaixo de File, no canto superior esquerdo, no ícone da folha de papel com um símbolo de mais `+`.
+
+Não há nenhum mistério no script. Como comentado logo acima, ele é basicamente um arquivo de texto. Ele servirá, basicamente, para você anotar comentários, lembrar de pacotes que utilizou em um trabalho, guardar funções importantes ou qualquer outra coisa que você queira salvar. 
+
+Na linguagem do R, se o texto for precedido de uma cerquilha `#` ele será interpretado como um comentário e não será executado. Por exemplo, suponha que queiramos criar um script para nos lembrar como criar objetos e realizar operações entre eles:
+
+```{r, collapse=TRUE, comment="", eval = FALSE}
+####### CRIANDO OBJETOS
+
+# Neste script, mostraremos como criar um objeto
+# Para criar qualquer objeto, precisamos utilizar o operador assign
+
+x <- 2
+
+# Acima estamos criando o objeto x e estamos atribuindo a ele o valor 2
+# Vamos criar agora o objeto y com o valor 3
+
+y <- 3
+
+# Agora, vamos realizar uma série de operações com os objetos
+
+x + y
+x*y
+x - y
+y - x
+```
+
+Se você estiver utilizando o RStudio, há duas maneiras de rodar o script: clicando em Run no canto superior direito da janela do script ou utilizando o atalho *Ctrl + Enter*. Ao clicar em Run, apenas a linha selecionada será rodada. Para rodar o script por inteiro selecione todo o arquivo e rode.
+
+## Pacotes
+
+Todas funções que aqui utilizamos são do pacote `base` do R. É possível que aquilo que você deseja fazer não tenha sido implementado no R. No entanto, por ele ser open source e contar com uma comunidade gigantesca, é muito possível que alguém já tenha criado um pacote que resolva seu problema.
+
+Para instalar um pacote é preciso utilizar a função `install.packages()`. É preciso que o nome do pacote esteja entre aspas. Após o pacote ter sido instalado em seu computador é preciso rodá-lo no R. Para isso, pode-se usar tanto a função `require()` como a função `library()`. Diferentemente da função de instalação, estas últimas não requerem que o nome do pacote esteja entre aspas. Para você usar um pacote é preciso rodá-lo toda vez que você inicia uma nova sessão do R.
+
+Abaixo listamos alguns pacotes:
+
+* `installr`: verifica se existe alguma atualização para o R e a instala
+* `ggplot2`: gráficos mais elegantes
+* `googlesheets`: importar dados das planilhas Google
+* `gdata`: importar arquivos .xls e .xlsx; requer perl para rodar
+* `XLConnect`: importar arquivos .xls e .xlsx; requer Java para rodar
+
+\newpage
+
+# Aprofundando o R
+
+## Estruturas de dados
+
+Podemos separar as estruturas de objetos no R pela sua composição ou pela dimensão. A composição pode ser homogênea (apenas um tipo no objeto) ou heterogênea (vários tipos diferentes no objeto). A dimensão pode variar de 1 a n dimensões.
+
+| Dim/Comp    | Homogêneo     | Heterogêneo |
+|-------------|---------------|-------------|
+| 1 dimensão  | Vetor atômico | Lista       |
+| 2 dimensões | Matriz        | Data frame  |
+| n dimensões | Array         |             |
+
+Uma função extremamente útil para verificar a estrutura de um objeto é `str()`, que fornece uma
+breve descrição sobre o objeto. Outra função de resumo de objetos é a `summary()`.
+
+Todas cinco estruturas listadas acima possuem *atributos*. De todos atributos possíveis, há dois que são intrínsecos a qualquer estrutra: o tipo (type) e o comprimento (length). 
+
+### Vetores atômicos
+
+Para criarmos um vetor atômico utilizamos a função `c()`.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+n <- c(1, 2, 3)
+```
+
+Note que os vetores atômicos são *planos*, isto é, criar um vetor atômico dentro de outro não traz nenhuma diferença ao resultado final.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+x <- c(1, 2, 3, 4)
+y <- c(1, 2, c(3, 4))
+identical(x, y)
+```
+
+Como comentado acima, as estruturas de dados possuem um atributo intrínseco chamado tipo. Trabalharemos aqui com quatro tipos diferentes: **logical**, **integer**, **double** e **character**. 
+
+Para criarmos um vetor do tipo lógico (logical), devemos utilizar os valores `TRUE` e `FALSE`. `T` e `F` também são reconhecidos pelo R. Para criar um vetor de inteiros (integer) devemos utilizar o sufixo L. Para criar um vetor de reais (double) basta criar um vetor com números. Para criar um vetor caractérico (char) devemos botar as palavras entre aspas:
+
+```{r, collapse=TRUE, comment="", prompt = TRUE, results = "hold"}
+logic <- c(T, F, TRUE, FALSE)
+integer <- c(1L, 2L, 3L)
+double <- c(2, 8, 9, 3)
+charac <- c("maria", "joao")
+
+logic
+integer
+double
+charac
+```
+
+Para verificarmos o tipo de um objeto, utilizamos a função `typeof()`:
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+typeof(logic)
+typeof(integer)
+typeof(double)
+typeof(charac)
+```
+
+Se quiseremos testar o tipo de um objeto, utilizamos as funções `is.character()`, `is.double()`, `is.logical()`, entre outras.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+is.logical(logic)
+is.character(charac)
+```
+
+Note que a função `is.numeric()` teste se o vetor é numérico ou não. Logo, retornará verdadeiro tanto para um vetor do tipo integer como um do tipo double. 
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+is.numeric(charac)
+is.numeric(double)
+```
+
+O que acontece se criarmos um vetor com dois tipos diferentes em sua composição?
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+b <- c("piscina", 1, 0, FALSE)
+typeof(b)
+```
+
+O vetor atômico b assumiu o tipo caractérico porque existe algo no R chamado de *regra de flexibilização*. Esta regra atesta que em uma estrutura homogênea apenas um tipo será suportado. 
+
+A ordem de flexibilidade dos tipos, do menos para o mais flexível, é a seguinte:
+
+* logical
+
+* integer
+
+* double
+
+* character
+
+Assim, sempre que houver mais de um tipo diferente no mesmo vetor atômico, todos valores assumirão o tipo mais flexível. 
+
+É possível forçar um vetor a assumir um tipo específico através das funções `as.character()`, `as.double()`, `as.integer()` e `as.logical()`. Veja a tabela abaixo para entender o que acontece na coerção forçada:
+
+|             | as.logical                    | as.numeric                       |
+|-------------|-------------------------------|----------------------------------|
+| Lógico      | permanece igual               | FALSE = 0, TRUE = 1              |
+| Numérico    | 0 = FALSE, outros números = 1 | permanece igual                  |
+| Caractérico | NA, se o texto não for lógico | NA, se o texto não for um número |
+
+|             | as.character            |
+|-------------|-------------------------|
+| Lógico      | fica em formato textual |
+| Numérico    | fica em formato textual |
+| Caractérico | permanece igual         |
+
+### Listas
+
+As listas, diferentemente dos vetores, são heterogêneas. Isto significa que suportam mais de um tipo em sua composição. Veja:
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+ls1 <- list(1:4, c(1, 5), c("massa", "pizza", "macarrao"), c(T, F, F))
+str(ls)
+```
+
+Outro aspecto que diferencia as listas de vetores atômicos é que as listas são recursivas. Isso significa que é possível criar uma lista dentro de outra lista.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+ls2 <- list(1, 2, 3, 4)
+ls2
+
+ls3 <- list(list(1, 2), 3, 4)
+ls3
+```
+
+É possível retirar todos os objetos de dentro de uma lista usando a função `unlist()`. Ao fazer isso, o vetor atômico resultante obedecerá as regras de flexibilização.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+ls1
+unl <- unlist(ls1)
+str(unl)
+```
+
+### Atributos
+
+Como falamos no início do capítulo, há dois atributos intrínsecos em qualquer objeto: o tipo e o comprimento. Para verificarmos o tipo de um objeto utilizamos a função `typeof()`. Para verificarmos o comprimento de um objeto utilizamos a função `length()`.
+
+Vamos falar do de um novo atributo agora: nomes (names). Podemos nomear os elementos de um vetor de duas maneiras - na hora de criar o vetor ou por atribuição.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+d <- c(a = 1, b = 2, c = 3)
+d
+
+e <- c(1, 2, 3)
+names(e) <- c("a", "b", "c")
+e
+```
+
+Podemos verificar os atributos que um objeto contém com a função `attributes()`. Esta função retornará todos atributos adicionais que um objeto tem.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+attributes(d)
+
+b
+attributes(b)
+```
+
+O atributo dimensão (dim) refere-se às dimensões do objeto. Como estamos tratando apenas de estruturas unidimensionais, este atributo não está presente.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+dim(d)
+```
+
+Para eliminar os nomes de um objeto, basta utilizar a função `unname()` ou atribuir o valor NULL aos nomes do objeto.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+d <- unname(d)
+d
+
+names(e) <- NULL
+e
+```
+
+### Fatores
+
+Os fatores são casos especiais de vetores atômicos por conterem um atributo restrito a eles, os léveis. 
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+fac <- factor(1:6)
+fac
+attributes(fac)
+```
+
+Os fatores são úteis para tratarmos de dados categóricos por causa da função `table()`.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+frutas <- sample(c("kiwi", "amora", "ameixa", "morango"), size = 1000, 
+                 replace = TRUE, prob = c(0.2, 0.3, 0.15, 0.35))
+fac_frutas <- factor(frutas)
+table(fac_frutas)
+```
+
+Não é possível inserir nenhum valor que não esteja nos léveis do fator. Ao tentar fazer isso, um valor NA será introduzido no lugar.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+fac
+fac[1] <- "mexerica"
+fac
+```
+
+### Matrizes
+
+Para criar uma matriz utilizamos a função `matrix()`. Seus argumentos são:
+
+* `x`: os valores dentro da matriz
+
+* `ncol`: o número de colunas
+
+* `nrow`: o número de linhas
+
+* `byrow`: um valor lógico; define se os valores vão ser organizados por linhas
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+mat1 <- matrix(1:6, ncol = 2, nrow = 3, byrow = FALSE)
+mat1
+
+mat2 <- matrix(1:6, ncol = 2, nrow = 3, byrow = TRUE)
+mat2
+```
+
+A função `length()` retornará todos os valores dentro da matriz. Se você quiser ver as dimensões, use a função `dim()`.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+length(mat1)
+dim(mat1)
+```
+
+É possível criar uma matriz através das funções `cbind()` e `rbind()`. A primeira unirá vetores através de colunas, já a segunda unirá através de linhas.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+a <- c(1, 2, 3)
+b <- c(4, 5, 6)
+
+cbind(a, b)
+rbind(a, b)
+```
+
+### Arrays
+
+Arrays são versões de matrizes generalizadas para n dimensões (sendo n maior que 2). Não nos estenderemos nesta parte, resumindo-a a um exemplo.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+arr <- array(1:24, dim = c(4, 3, 2))
+arr
+```
+
+### Data frames
+
+Data frames são muito parecidos com matrizes. Como são heterogêneos, cada coluna pode suportar um tipo diferente.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+dat <- data.frame(numeros = c(1, 5, 6), 
+                  frutas = c("mirtilo", "banana", "laranja"), 
+                  logicos = c(T, F, F))
+dat
+str(dat)
+```
+
+Note que a coluna *frutas* foi criada como sendo um fator. Para suprimir este comportamento, basta usar o argumento `stringAsFactors = FALSE`
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+dat2 <- data.frame(numeros = c(1, 5, 6), 
+                  frutas = c("mirtilo", "banana", "laranja"), 
+                  logicos = c(T, F, F),
+                  stringsAsFactors = FALSE)
+dat2
+str(dat2)
+```
+
+Se você usar `typeof()` em um data frame o R lhe retornará list. Isso acontece porque data frames são listas em duas dimensões. Para verificar o tipo de uma coluna especifica, use o cifrão `$` e o nome da coluna depois do objeto.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+typeof(dat)
+typeof(dat$numeros)
+```
+
+## Subsetting
+
+Subsetting é o ato de retirar de um objeto apenas as partes que lhe interessam. Imagine que você tem um data frame com 23 colunas, mas que você precisa apenas da quinta para realizar sua análise. Com o subsetting é possível retirar apenas esta quinta coluna, sem precisar ter que trazer todo o conjunto de dados novamente.
+
+Começaremos a falar de subsetting em vetores atômicos, que são a estrutura mais simples, para depois generalizarmos para as outras dimensões.
+
+### Vetores atômicos
+
+Vamos criar um vetor atômico x:
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+x <- c(2.1, 4.2, 5.3, 8.4)
+x
+```
+
+A casa decimal que tem em cada valor do vetor corresponde a sua posição dentro do vetor. Caso você queira retirar o segundo valor do vetor, basta usar o operador `[]` depois do vetor.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+x[2]
+```
+
+É possível fazer subsetting com vetores atômicos para retirar mais de um valor.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+x[c(1, 3)]
+
+# Note que a ordem que você especifica o subsetting importa.
+
+x[c(3, 1)]
+```
+
+É possível também pedir valores repetidos e não-inteiros.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+x[c(2, 2)]
+x[c(2.1, 2.9)]
+```
+
+Se colocarmos um sinal negativo `-` antes do vetor dentro do subsetting, aqueles valores serão omitidos.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+x[-c(3, 4)]
+```
+
+O subsetting pode ser feito também com valores lógicos ou condições.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+x[c(T, F, T, F)]
+
+# A reciclagem ocorre para o subsetting. O subset acima é equivalente ao de baixo.
+
+x[c(T, F)]
+
+x[x >= 5]
+```
+
+É possível fazer o subset por nome caso o vetor tenha nomes.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+y <- c(a = 1, b = 2, c = 3)
+y["a"]
+```
+
+### Listas
+
+O subset de listas é extremamente parecido com o de vetores atômicos. Além do subset através dos colchetes simples `[]`, é possível realizar o subset através dos colchetes duplos `[[]]`. O resultado no final será diferente devido à *simplificação* ou *preservação* do objeto. Discutiremos este assunto logo em seguida. No entanto, verifique a diferença dos resultados.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+ls <- list(1:5, c(T, F, T), c("pera", "melão", "melancia"))
+ls
+```
+
+```{r, comment="", prompt = TRUE}
+ls[2]
+ls[[2]]
+str(ls[2])
+str(ls[[2]])
+```
+
+### Matrizes
+
+As matrizes possuem duas dimensões. Isto significa que o operador de subset `[]` necessitará de dois argumentos: um para o número de linhas a serem retiradas e outro para o número de colunas. Veja:
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+mat <- matrix(1:9, ncol = 3)
+mat
+```
+
+Vamos retirar a primeira e a terceira linha junto com a segunda e a terceira coluna.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+mat[c(1, 3), c(2, 3)]
+
+# Não especificar um dos argumentos é o mesmo que pedir para que todas as colunas sejam retiradas
+
+mat[c(1, 3), ]
+```
+
+### Data frames
+
+O subset de data frames é igual ao subsetting de matrizes (2 dimensões) ou ao subsetting de listas (heterogeneidade). É possível realizar tanto de um modo como de outro.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+dat <- data.frame(a = 1:10, b = letters[1:10], c = LETTERS[1:10])
+dat
+```
+
+Vamos fazer o subset primeiro como se fosse uma lista.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+dat[1]
+```
+
+Agora como se fosse uma matriz.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+dat[ , 1]
+```
+
+Note que os resultados foram diferentes. Isto é a *preservação* e a *simplificação*, respectivamente. 
+
+Uma outra maneira interessante de realizar subsets em data frames é através de condições lógicas. Veja a construção abaixo passo a passo.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+# Queremos que o nosso data frame seja retornado apenas com as linhas que tenham valor 
+# maior ou igual a 5 na coluna a.
+# Primeiro fazemos a condição.
+
+dat[ , 1] >= 5
+
+# Note que isto retornou um vetor lógico. Coloquemos a condição acima dentro 
+# de um subsetting.
+
+dat[dat[ , 1] >= 5, ]
+
+# Assim, retiramos as linhas que não queríamos. Isto acontece, pois o 
+# subset acima é equivalente ao subset abaixo.
+
+dat[c(F, F, F, F, T, T, T, T, T, T), ]
+
+# Que significa que não queremos as cinco primeiras linhas.
+```
+
+### Preservação e simplificação
+
+Imagine as estruturas de dados como vagões de trens com cargas em seus interiores. Fazendo uma analogia, a preservação irá retirar o vagão com a carga dentro na hora de fazer o subsetting. A simplificação retirará apenas a carga.
+
+Abaixo temos uma tabela com um resumo dos operadores de subsetting para realizar a simplificação ou a preservação.
+
+| Estrutura de dados | Simplificação         | Preservação               |
+|--------------------|-----------------------|---------------------------|
+| Vetor atômico      | x[[ ]]                | x[ ]                      |
+| Lista              | x[[ ]] ou x$          | x[ ]                      |
+| Fator              | x[ , drop = T]        | x[ ]                      |
+| Matriz             | x[ , 1]               | x[ , 1, drop = F]         |
+| Data frame         | x[ , 1], x[[1]] ou x$ | x[ , 1, drop = F] ou x[1] |
+
+Vamos realizar exemplos de simplificação agora.
+
+#### Vetores atômicos
+
+Se um vetor atômico possuir nome, a simplificação retornará os valores sem seu nome.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+y
+y[[1]]
+```
+
+#### Listas
+
+As listas perderão sua estrutura de lista.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+ls
+```
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+ls[[1]]
+is.list(ls[[1]])
+```
+
+#### Fatores
+
+O fator perderá léveis que não aparecem no subset.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+fac
+fac[2, drop = T]
+```
+
+#### Matrizes
+
+As matrizes perderão sua estrutura bidimensional.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+mat
+mat[ , 1]
+is.matrix(mat[ , 1])
+```
+
+#### Data frames
+
+Os data frames perderão sua estrutura bidimensional.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+dat
+dat$a
+is.atomic(dat$a)
+```
+
+### Subset e assignment
+
+Como você já deve ter realizado, é possível realizar o subsetting em conjunto com o assignment caso você queira mudar um valor de um vetor, por exemplo,
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+x
+x[2] <- 23
+x
+```
+
+## Gráficos
+
+É possível criar muitos gráficose customizá-los de muitas maneiras através do R. Você pode verificar as demonstrações que o R tem de gráficos através de `demo(graphics)` ou `demo(persp)`.
+
+### Layout
+
+No RStudio os gráficos são apresentados na tela no canto inferior direito. Toda vez que você cria um gráfico, uma nova janela é criada. Veja:
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+x <- 1:5
+plot(x)
+```
+
+No entanto, isso pode ser modificado através de `layout()`. Esta função, em conjunto com matrizes, permite que você altere a disposição dos gráficos na tela. Se você tiver a seguinte matriz:
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+matriz <- matrix(1:2, nrow = 1)
+matriz
+```
+
+E colocá-la dentro da função `layout()`, a disposição de gráficos será repartida na metade:
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+layout(matriz)
+plot(x)
+plot(x)
+```
+
+Você pode criar disposições à maneira que quiser. Vamos criar uma disposição extremamente bizarra para exemplificar.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+a <- c(1, 2, 0, 0)
+b <- c(1, 2, 0, 4)
+c <- c(0, 2, 3, 4)
+d <- c(0, 2, 3, 0)
+
+matriz2 <- rbind(a, b, c, d)
+matriz2
+```
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+layout(matriz2)
+plot(x)
+plot(x)
+plot(x)
+plot(x)
+```
+
+\newpage
+
+É possível verificar a disposição que você fez através da função `layout.show()`.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+layout(matriz2)
+layout.show(4)
+```
+
+Para resetar à disposição original, basta usar `layout(1)`.
+
+### Funções
+
+As funções relacionadas à gráficos podem ser dividas em duas categorias: funções de alto e de baixo nível.
+
+#### Funções de alto nível
+
+Estas funções referem-se à criação de gráficos do zero. Funções como `plot()`, `pie()`, `barplot()`, entre outras, são funções de alto nível.
+
+#### Funções de baixo nível
+
+São as funções que adicionam elementos em um gráfico já criado. Alguns exemplos são `abline()`, `rect()` e `points()`. Alguns outros exemplos podem ser encontrados no cartão de referência.
+
+### Parâmetros
+
+Os parâmetros são os argumentos que você usa para colocar as especificações nos gráficos. Uma lista completa pode ser visualizada através de `help(par)`.
+
+Você pode definir os parâmetros de duas maneiras: definir os parâmetros globais previamente, ou definir nos argumentos de um gráfico. Para definir previamente, deve-se usar a função `par()` com os argumentos que você quer. Por exemplo, suponha que você queira transformar o fundo em azul claro:
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+par(bg = "lightblue")
+plot(x)
+```
+
+A partir de agora, todas gráficos que você criar terão fundo azul claro. Para resetar para os parâmetros originais, basta usar `dev.off()`
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+dev.off()
+```
+
+\newpage
+
+A outra maneira comentada é utilizar os parâmetros na hora de criar a função.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+plot(x, main = "Gráfico exemplo", xlab = "Indexador", ylab = "Pontos de 1 a 5", 
+     bty = "l", cex = 2)
+# Estes parâmetros servem, respectivamente, para criar o título do gráfico, 
+# para criar o texto do eixo x, para criar o texto do eixo y, para definir o 
+# formato da caixa e para definir o tamanho dos pontos
+```
+
+Uma lista com os parâmetros mais comuns está no cartão de referência.
+
+\newpage
+
+# Usando o R na prática
+
+## Importar dados reais
+
+### Diretório
+
+É possível importar dados para o R. Antes de vermos como se faz isso, é preciso falar sobre o local do diretório. O local do diretório é o destino que o R está trabalhando neste exato momento. Para verificar qual é este destino, basta usar a função `getwd()`
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+getwd()
+```
+
+Como você pode ver, este é o diretório que o meu R está trabalhando neste momento. No entanto, os dados estão em outra pasta, não na pasta *Apostilas*. Para mudar o diretório, basta utilizar a função `setwd()`
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+setwd("../Dados")
+
+# O comando "../Dados" significa que quero que o que o destino volte uma
+# pasta para trás e, após isso, entre na pasta Dados
+
+getwd()
+```
+
+```{r, echo = FALSE}
+knitr::opts_knit$set(root.dir = "C:/Users/Marcelo/Desktop/Aprender_R/Dados")
+
+# Isto aqui serve para poder ajustar DE VERDADE o diretório. A função setwd() não modifica o diretório de verdade aqui dentro do markdown. Para isto, tive que usar a função acima.
+```
+
+### Lendo em .csv
+
+Agora que o destino está corretamente localizado, posso importar os dados. Os dados chamam-se *bwght* e estão disponíveis no [site](http://www.cengage.com/aise/economics/wooldridge_3e_datasets/) da Cengage em formato *.xls*. Para esta análise, converti os dados para *.csv*. Os dados são sobre o peso de recém-nascidos. 
+
+Para importar os dados para o R, utilizamos a função `read.csv()`
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+peso <- read.csv("bwght.csv", header = TRUE, sep = ";")
+dim(peso)
+```
+
+Como você pode ver, os dados possuem muitas linhas. Para verificar apenas as linhas iniciais, utilize a função `head()`.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+head(peso)
+```
+
+### Lendo em .xlsx
+
+O R não possui funções que leiam a extensão *.xlsx* ou *.xls*. Para isso, é precisa instalar alguns pacotes. Um pacote que eu recomendo a instalação é o `XLConnect`. Outra opção possível é o `xlsx`. No entanto, estes pacotes precisam ter o Java instalado para que possam rodar. Na apostila de instalação existe um tutorial de como instalar o Java para poder utilizar estes pacotes.
+
+## Análise descritiva
+
+Agora vamos fazer algumas micro-análises utilizando estes dados que importamos. 
+
+```{r, comment="", prompt = TRUE}
+# Verificar um resumo de quantos homens existem na amostra
+# Observação: o valor 0 corresponde a mulheres e o 1 a homens
+
+table(peso$male)
+
+# Verificar a proporção de homens na amostra
+
+table(peso$male)/length(peso$male)
+
+# Fazer um gráfico de setores para o resultado acima
+
+pie(table(peso$male)/length(peso$male))
+
+# Ver a média da renda familiar para todas pessoas na amostra
+
+mean(peso$faminc)
+
+# Ver um resumo da renda familiar
+
+summary(peso$faminc)
+
+# Ver a correlação entre renda familiar e peso no nascimento
+
+cor(peso$faminc, peso$bwght)
+```
+
+## Regressão
+
+Para esta parte de regressão, trabalharemos com uma base de dados embutida no R chamada *cars*.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+cars
+plot(cars)
+```
+
+A função da regressão é `lm()`. O primeiro argumento é a variável resposta (Y) e o segundo é a variável regressora (X). Vamos fazer a regressão de uma coluna pela outra.
+
+```{r, comment="", prompt = TRUE}
+lm(cars$dist ~ cars$speed)
+```
+
+Para ver mais detalhes da regressão, utilizamos `summary()`.
+
+```{r, comment="", prompt = TRUE}
+summary(lm(cars$dist ~ cars$speed))
+```
+
+Para desenhar a reta de regressão no gráfico, podemos utilizar a função de baixo nível `abline()`.
+
+```{r, collapse=TRUE, comment="", prompt = TRUE}
+plot(cars)
+abline(lm(cars$dist ~ cars$speed))
+```
+
+## Gerando PDFs
+
+Para gerar um PDF através do R, é necessário ter o MiKTeX instalado. O passo-a-passo para a instalação está na apostila de instalações.
+
+Para criar um PDF, basta clicar no canto superior esquerdo, no ícone embaixo de File. Clique ali e em seguida em R Markdown. Selecione Document, bote o título e o nome do autor e selecione a opção PDF.
+
+Ao fazer isso, será aberto um arquivo *.rmd*. Agora, você pode começar a escrever em RMarkdown para gerar seu PDF. Toda a sintaxe do Rmarkdown está resumida no Reference Guide do RMarkdown. O link está no capítulo Referências. Além da linguagem plana de markdown, existem os chunks de códigos que servem para escrever códigos na própria linguagem do R. No Reference Guide também tem a explicação de como criar chunks.
+
+Após você ter escrito seu PDF, basta clicar em Knit PDF e o R compilará tudo que foi escrito para um PDF.
+
+Todos os códigos das apostilas criadas estão sendo disponibilizados para que seja possível verificar exemplos e se familizar com a estrutura do RMarkdown.
+
+\newpage
+
+# Referências 
+
+[Using R for Introductory Econometrics - Florian Heiss](http://www.urfie.net/read/read.html) (http://www.urfie.net/read/read.html)
+
+[Introdução ao Ambiente Estatístico R - Paulo Justiniano Ribeiro Junior](http://www.leg.ufpr.br/~paulojus/embrapa/Rembrapa/) (http://www.leg.ufpr.br/~paulojus/embrapa/Rembrapa/)
+
+[R For Begginers - Emamnuel Paradis](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf) (https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf)
+
+[Advanced R - Hadley Wickham](http://adv-r.had.co.nz) (http://adv-r.had.co.nz)
+
+[R Markdown Reference Guide - Rstudio Team](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) (https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)

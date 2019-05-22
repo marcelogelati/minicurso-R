@@ -1,0 +1,103 @@
+---
+title: "Como instalar os componentes"
+subtitle: "Semana acadêmica da economia"
+author: "Marcelo Gelati"
+toc: true
+output: pdf_document
+---
+
+\newpage
+
+# R
+
+Para fazer download do *software* R acesse a página [The R Project for Statistical Computing](https://www.r-project.org/) (https://www.r-project.org/) e clique em *download* R.
+
+![R_1](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/R_1.png)
+
+\newpage
+
+Selecione o repositório de onde deseja realizar o download, especifique seu sistema operacional e
+selecione *base*.
+
+![R_2](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/R_2.png)
+
+![R_3](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/R_3.png)
+
+\newpage
+
+Supondo que seu sistema operacional seja *Windows*, selecione *Download R 3.3.1 for Windows (70 megabytes, 32/64 bit)* e siga as instruções de instalação.
+
+![R_4](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/R_4.png)
+
+\newpage
+
+# RStudio
+
+Após a instalação do R, faça o *download* do RStudio acessando a [página da ferramenta](https://www.rstudio.com) (https://www.rstudio.com) e clique
+em *Download RStudio*.
+
+![RStudio_1](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/RStudio_1.png)
+
+\newpage
+
+Selecione a opção RStudio Desktop e clique no instalador adequado para seu sistema operacional.
+
+![RStudio_2](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/RStudio_2.png)
+
+\newpage
+
+![RStudio_3](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/RStudio_3.png)
+
+Execute o arquivo e siga as instruções de instalação.
+
+\newpage
+
+# MiKTeX
+
+Precisaremos do MiKTeX para gerar documentos em PDF. Para instalá-lo, entre na [sua página](http://miktex.org) (http://miktex.org) e clique em *Download*.
+
+![MiKTeX_1](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/Miktex_1.png)
+
+\newpage
+
+Em seguida clique em *Other Downloads*. Se seu sistema operacional for de 32 bits clique na opção *MiKTeX 2.96050 Net Installer*. Caso for de 64 bits selecione *MiKTeX 2.96050 64-bit Net Installer*.
+
+![MiKTeX_2](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/Miktex_2.png)
+
+\newpage
+
+Execute o programa para prosseguir com a instalação. Execute os passos até chegar na opção *Download MiKTeX*. Selecione-a e clique em avançar.
+
+![MiKTeX_3](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/Miktex_3.png)
+
+\newpage
+
+Selecione a opção *Complete MiKTeX* e selecione uma distribuição do Brasil. Continue avançando e espere os arquivos serem baixados.
+
+![MiKTeX_4](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/Miktex_4.png)
+
+\newpage
+
+![MiKTeX_5](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/Miktex_5.png)
+
+\newpage
+
+Agora é preciso executar o instalador novamente. Ao fazer isso, vá avançando até chegar na opção *Install MiKTeX*. Selecione-a e clique em avançar.
+
+![MiKTeX_6](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/Miktex_6.png)
+
+\newpage
+
+Selecione agora *Complete MiKTeX*.
+
+![MiKTeX_17](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/Miktex_7.png)
+
+E siga os passos de instalação até o final.
+
+\newpage
+
+# Java
+
+É preciso instalar o Java para usar os pacotes `XLConnect` e `xlsx`. Acesse a [página do Java](https://www.java.com/pt_BR/download/manual.jsp) (https://www.java.com/pt_BR/download/manual.jsp) e selecione *Windows Off-line* ou *Windows Off-line (64 bits)*, dependendo do seu sistema operacional. Ao baixar, execute o instalador e siga passo-a-passo.
+
+![Java_1](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/Java_1.png)

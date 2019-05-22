@@ -1,0 +1,117 @@
+---
+title: "Cartão de referência"
+subtitle: "Semana acadêmica da economia"
+author: "Marcelo Gelati"
+output: pdf_document
+---
+
+# OPERADORES BÁSICOS 
+
+|      | Básicos               |     | Aritmética                               |
+|------|-----------------------|-----|------------------------------------------|
+| <-   | atribuir              | +   | adição                                   |
+| $    | substituir ou extrair | -   | subtração                                |
+| [    | idem                  | *   | multiplicação                            |
+| [[   | idem                  | /   | divisão                                  |
+| ?    | acesso a documentação | ^   | potência                                 |
+| help | idem                  | %%  | divisão de inteiros,  retornando o resto |
+|      |                       | %/% | idem, mas retorna o resultado            |
+
+|    | Comparação       |     | Lógicos      |
+|----|------------------|-----|--------------|
+| <  | menor a          | !   | NÃO lógico   |
+| >  | maior a          | &   | E lógico     |
+| <= | menor ou igual a | &&  | idem         |
+| >= | maior ou igual a | |   | OU lógico    |
+| == | igual a          | ||  | idem         |
+| != | diferente de     | xor | OU exclusivo |
+
+# CONTROLANDO OS OBJETOS
+
+
+| Função       | Descrição               |   | Função     | Descrição                |
+|--------------|-------------------------|---|------------|--------------------------|
+| is.\*()      | testa se o objeto é \*  |   | dim()      | dimensão do objeto       |
+| as.\*()      | força o objeto a ser \* |   | ncol()     | número de colunas        |
+| str()        | estrutura do objeto     |   | nrow()     | número de linhas         |
+| summary()    | resumo do objeto        |   | t()        | troca linhas por colunas |
+| c()          | cria um vetor atômico   |   | cbind()    | une colunas              |
+| list()       | cria uma lista          |   | rbind()    | une linhas               |
+| factor()     | cria um fator           |   | names()    | nome dos elementos       |
+| matrix()     | cria uma matrix         |   | colnames() | nome das colunas         |
+| array()      | cria um arranjo         |   | rownames() | nome das linhas          |
+| data.frame() | cria um data frame      |   | t()        | troca linhas por colunas |
+| length()     | tamanho do objeto       |   |            |                          |
+
+\newpage
+
+# MATEMÁTICA E ESTATÍSTICA
+
+| Função              | Descrição                              |
+|---------------------|----------------------------------------|
+| abs()               | módulo                                 |
+| sin(), cos(), tan() | seno, cosseno e tangente (em radianos) |
+| ceiling()           | arredonda para o maior inteiro         |
+| floor()             | arredonda para o menor inteiro         |
+| round()             | arredonda com base na "regra do 0.5"   |
+| exp()               | exponencial                            |
+| log()               | logaritmo na base e                    |
+| sqrt()              | raiz quadrada                          |
+| max(), min()        | valor máximo e mínimo                  |
+| range()             | valor máximo e mínimo                  |
+| prod(), sum()       | produto  e soma                        |
+| mean(), median()    | média e mediana                        |
+| var(), sd()         | variância e desvio padrão              |
+| cov(), cor()        | covariância e correlação               |
+
+
+# OUTRAS FUNÇÕES
+
+| Função               | Descrição                |
+|----------------------|--------------------------|
+| install.packages()   | instalar pacotes         |
+| require(), library() | carregar pacotes         |
+| demo()               | demonstrações de funções |
+| example()            | exemplos de funções      |
+
+
+# FUNÇÕES DE GRÁFICOS
+
+| Função               | Descrição                                                                 |
+|----------------------|---------------------------------------------------------------------------|
+| plot(y)              | Cria um gráfico com os valores de y (eixo y) contra um indexador (eixo x) |
+| plot(x, y)           | Cria um gráfico com os valores de x (eixo x) contra um indexador (eixo y) |
+| pie(x)               | Cria um gráfico de setores (gráfico de pizza)                             |
+| hist(x)              | Cria um histograma                                                        |
+| barplot(x)           | Cria um gráfico de barras                                                 |
+| boxplot(x)           | Cria um boxplot                                                           |
+| points(x, y)         | Adiciona pontos no gráfico                                                |
+| lines(x, y)          | Adiciona linhas no gráfico                                                |
+| abline(a, b)         | Cria uma linha com inclinação **b** e intercepto **a**                    |
+| polygon(x, y)        | Adiciona um polígono no gráfico                                           |
+| rect(x1, y1, x2, y2) | Adiciona um retângulo no gráfico, sendo as coordenadas as extremidades    |
+
+\newpage
+
+# PARÂMETROS DE GRÁFICOS
+
+| Parâmetro  | Descrição                                | Valores possíveis                            |
+|------------|------------------------------------------|----------------------------------------------|
+| main       | define o título principal                | texto                                        |
+| sub        | define o subtítulo                       | texto                                        |
+| xlab, ylab | define o texto dos eixos                 | texto                                        |
+| xlim, ylim | define os extremos do gráfico            | números                                      |
+| bg         | define a cor de fundo                    | a lista de cores está disponível em colors() |
+| bty        | especifica o formato da caixa            | o, l, 7, c, u, ], n                          |
+| cex.*      | controla o tamanho do texto              | números                                      |
+| col.*      | controla a cor do texto                  | a lista de cores está disponível em colors() |
+| font       | controla o estilo do texto               | de 1 a 4                                     |
+| las        | orientação dos números dos eixos         | de 1 a 4                                     |
+| lty        | controla o tipo da linha                 | de 1 a 6                                     |
+| lwd        | controla a largura da linha              | números                                      |
+| mar        | controla as margens                      | números                                      |
+| pch        | controla o desenho dos pontos            | números ou texto; ver figura abaixo          |
+
+Nota: todos parâmetros que forem seguidos de ".*" podem ter outras especificações. Exemplo: cex.axis (para controlar os números nos eixos), cex.lab (para controlar os textos dos eixos), cex.main (para controlar o título) e cex.sub (para controlar o subtítulo). Se o parâmetro for usado individualmente (por exemplo, apenas "cex") os comandos irão para os pontos.
+
+![Valores do pch](C:/Users/Marcelo/Desktop/Aprender_R/Imagens/pch.png)
